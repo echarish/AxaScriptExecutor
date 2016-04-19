@@ -1,0 +1,102 @@
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <% if(selector){ %>
+            <div class="col-md-12" style="margin-bottom:20px">
+
+                <h4 class="alert alert-info blackiconcolor">Select Script to attach to this server</h4>
+                <hr class="colorgraph">
+                <table id="targetServerListTB" class="table table-striped table-bordered  blackiconcolor"
+                       cellspacing="0" width="100%">
+                    <thead>
+                    <tr class="tableHeader">
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th>Type</th>
+                        <th>Batch Name</th>
+                        <th>User Name</th>
+                        <th>Shell Script</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <% for(var i = 0; i < server_scripts.length; i++) { %>
+                    <% var stringVal=JSON.stringify(server_scripts[i]) %>
+                    <tr>
+                        <td>
+                            <input name="attachCheckBox" type="checkbox"
+                                   value="<%=stringVal%>" onchange="setSelectedCheck(this)">
+                        </td>
+                        <td><%= server_scripts[i].script_type %></td>
+                        <td><%= server_scripts[i].batch_name %></td>
+                        <td><%= server_scripts[i].script_executor_id %></td>
+                        <td><%= server_scripts[i].script_name %></td>
+
+                    </tr>
+                    <% } %>
+
+                    </tbody>
+
+                    <tfoot>
+
+
+                </table>
+                <div class="col-md-4 col-md-offset-4">
+                    <input type="button" onclick="attachScriptsToServer(selectedScripts,'<%=server_id%>');" value="Attach"
+                           class="btn btn-primary btn-block btn-lg" tabindex="7">
+                </div>
+            </div>
+            <% }else{ %>
+            <div class="col-md-8 col-md-offset-2" style="margin-bottom:20px">
+
+                <h2 class="alert alert-info blackiconcolor">Registered scripts list</h2>
+                <hr class="colorgraph">
+                <table id="targetServerListTB" class="table table-striped table-bordered  blackiconcolor"
+                       cellspacing="0" width="100%">
+                    <thead>
+                    <tr class="tableHeaderAlignRight">
+                        <th colspan="5" class="text-right">
+                            <a href="javascript:addNewIndShellScript();"><i
+                                        class="fa fa-fw fa-plus blueiconcolor"></i><br>New <br>Script</a></th>
+                    </tr>
+                    <tr class="tableHeader">
+                        <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                        <th>Type</th>
+                        <th>Batch Name</th>
+                        <th>User Name</th>
+                        <th>Shell Script</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% for(var i = 0; i < server_scripts.length; i++) {
+                        var scriptVal=JSON.stringify(server_scripts[i]);
+                    %>
+
+                    <tr>
+                        <td>
+                            <a href="javascript:deleteIndServerScript('<%= server_scripts[i]._id %>');"><i
+                                        class="fa fa-fw fa-trash  rediconcolor"></i></a>
+                            <a href="javascript:editServerScriptPre('<%= scriptVal %>');"><i
+                                        class="fa fa-fw fa-pencil-square-o  blueiconcolor"></i></a>
+                        </td>
+                        <td><%= server_scripts[i].script_type %></td>
+                        <td><%= server_scripts[i].batch_name %></td>
+                        <td><%= server_scripts[i].script_executor_id %></td>
+                        <td><%= server_scripts[i].script_name %></td>
+
+                    </tr>
+                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+            <% } %>
+
+        </div>
+
+
+    </div>
+</div>
+<script>
+    $('#targetServerListTB').DataTable();
+</script>
+

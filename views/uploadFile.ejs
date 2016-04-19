@@ -1,0 +1,86 @@
+<div class="container-fluid" style="width:800px">
+
+
+    <div class="col-lg-12">
+        <div class="col-md-12">
+            <% include errorDiv.ejs %>
+            <form role="form" action="/uploadFileOnServer" style="margin-bottom:20px" id="uploadFileForm" method="post"
+                  enctype="multipart/form-data">
+                <h2 class="alert alert-info blackiconcolor">Upload File</h2>
+                <hr class="colorgraph">
+                <div class="form-group">
+                    <input type="text" name="folder_location" id="folder_location"
+                           class="form-control input-lg"
+                           placeholder="Upload location on server" tabindex="3">
+                </div>
+                <div class="form-group">
+
+                    <input type="file" name="upload_file" id="upload_file" class="file form-control input-lg"
+                           tabindex="3" data-show-preview="false" multiple data-show-upload="false">
+                </div>
+                <% var serverVal = JSON.stringify(server) %>
+
+                <input type="text" name="server" id="server" value="<%= serverVal %>" style="display: none">
+                <input type="text" name="user_name" id="user_name" value="<%= user.username %>" style="display: none">
+
+                <hr class="colorgraph">
+                <div class="col-md-8 col-md-offset-2">
+                    <input type="button" onclick="fileupload()"
+                           value="Upload"
+                           class="btn btn-primary btn-block btn-lg" tabindex="7">
+
+                </div>
+
+            </form>
+            <div class="row" style="margin-bottom:20px">
+
+                <div class="col-md-2">
+                    <i id="fileUploadFileSpinnerId"
+                       class="fa fa-circle-o-notch fa-spin blueiconcolor"
+                       style="font-size:40px;display: none"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#upload_file").fileinput();
+    // with plugin options
+    $("#upload_file").fileinput({'showUpload': false, 'previewFileType': 'any'});
+
+    $("#uploadFileForm").submit(function (e) {
+        $('#fileUploadFileSpinnerId').show();
+        var formObj = $(this);
+        var formURL = formObj.attr("action");
+        var formData = new FormData(this);
+        $.ajax({
+            url: formURL,
+            type: 'POST',
+            data: formData,
+            mimeType: "multipart/form-data",
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data, textStatus, jqXHR) {
+               alert('Upload Successful');
+                $('#main-page-content-wrapper').html(data);
+                $('#fileUploadFileSpinnerId').hide();
+                $('#cboxClose').click();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Upload failed '+textStatus+ ' '+errorThrown);
+            }
+        });
+        e.preventDefault(); //Prevent Default action.
+        e.unbind();
+    });
+
+    function fileupload() {
+        $("#uploadFileForm").submit();
+    }
+
+
+
+</script>
+
+

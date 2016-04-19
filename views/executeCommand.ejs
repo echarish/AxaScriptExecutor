@@ -1,0 +1,56 @@
+<div class="container-fluid" style="width:800px">
+
+
+    <div class="col-lg-12">
+        <div class="col-md-12">
+            <% include errorDiv.ejs %>
+            <form role="form" style="margin-bottom:20px" id="executeCommandForm" method="post">
+                <h2 class="alert alert-info blackiconcolor">Command Executor</h2>
+                <hr class="colorgraph">
+                <div class="form-group">
+                    <input type="text" name="command_value" id="command_value" class="form-control input-lg"
+                           placeholder="Command to execute" tabindex="3" autofocus>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="executor_id" id="executor_id" class="form-control input-lg"
+                           value="ReadOnly" tabindex="3">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="executor_password" id="executor_password" class="form-control input-lg"
+                           value="readonly" tabindex="3">
+                </div>
+                <hr class="colorgraph">
+
+            </form>
+            <div class="row" style="margin-bottom:20px">
+                <% var serverVal = JSON.stringify(server) %>
+                <div class="col-md-8 col-md-offset-2">
+                    <input type="button"
+                         onclick="executeCommand('<%= serverVal %>','<%= user.username %>');"
+                         value="Execute"
+                         class="btn btn-primary btn-block btn-lg" tabindex="7">
+
+                </div>
+                <div class="col-md-2">
+                    <i id="commandExecutorSpinnerID"
+                       class="fa fa-circle-o-notch fa-spin blueiconcolor"
+                       style="font-size:40px;display: none"></i>
+                </div>
+            </div>
+
+            <div class="row" style="margin-bottom:20px">
+                <div class="alert alert-info" id="commandExecutionResultDiv">
+                    <h3>Result of execution </h3>
+                    <h4 id="commandExecutedScripHeading"></h4>
+                    <hr class="colorgraph">
+                    <textarea id="commandExecutionResultTxtAr" class="form-control" rows="8"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<script>
+    $('#commandExecutionResultDiv').hide();
+
+</script>-->
+

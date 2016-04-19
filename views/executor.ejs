@@ -1,0 +1,38 @@
+<% include ./template/base.ejs %>
+<body>
+<script src="/js/executor.js"></script>
+<link rel="stylesheet" href="/stylesheets/scriptexecutor.css">
+
+<div class="container-fluid">
+
+
+  <div class="row col-md-10 center-block">
+     <h1>Script Executor</h1>
+    <div class="panel panel-info margin-bottom-40">
+      <div class="panel-heading">
+        <h3 class="panel-title" id="headerMessage"> Please input the location of your script in server</h3>
+      </div>
+      <div class="panel-body">
+
+          <div class="form-group">
+
+            <input type="text" class="form-control" id="scriptLocation" placeholder="/opt/script/somescript.sh">
+              <label class="radio-inline"><input type="radio" name="optradio" value="shell" checked="">Shell Call</label>
+              <label class="radio-inline"><input type="radio" name="optradio" value="command">Command Execute</label>
+          </div>
+
+          <button id="executeScriptBtn" type="button" class="btn-success has-spinner"><span class="spinner"><i class="icon-spin icon-refresh"></i></span>Execute</button>
+
+        <h3>Result of Execution</h3>
+        <textarea id="executionResultTxtAr" class="form-control" rows="10"></textarea>
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>
+
+</body>
+</html>

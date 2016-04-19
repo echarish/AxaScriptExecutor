@@ -1,0 +1,45 @@
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav side-nav box-shadow">
+        <li  tabindex="-1" class="active">
+            <a id="serverListAnchor" aria-expanded="true" href="./home">
+                <i class="fa fa-fw fa-list-ol"></i> Server List</a>
+        </li>
+        <li  tabindex="-4" class="odd">
+            <a id="executionLogAnchor"  aria-expanded="true" href="#">
+                <i class="fa fa-fw fa-th-list"></i> Execution Log</a>
+        </li>
+
+       <!-- <li  tabindex="-3" class="">
+            <a id="projectListAnchor"  aria-expanded="true" href="#">
+                <i class="fa fa-fw fa-arrows-v"></i> Project List</a>
+        </li>-->
+
+
+
+      <!--  <li  tabindex="-7" class="">
+            <a id="applicationsListAnchor" aria-expanded="true" href="#">
+            <i class="fa fa-fw fa-dashboard"></i> Applications</a>
+        </li>-->
+
+        <%if(user.user_role=='admin'){%>
+        <li  tabindex="-5" class="">
+            <a id="usersListAnchor" aria-expanded="true" href="#">
+                <i class="fa fa-fw fa-users"></i> Users</a>
+        </li>
+
+        <li  tabindex="-6" class="odd">
+            <a id="registerNewUserAnchor" aria-expanded="true" href="#">
+                <i class="fa fa-fw fa-user-plus"></i> Add New User</a>
+        </li>
+        <li  tabindex="-2" class="">
+            <a id="registerServerAnchor" aria-expanded="true" href="#">
+                <i class="fa fa-fw fa-linux"></i> Register Server</a>
+        </li>
+
+        <li  tabindex="-6" class="odd">
+            <a id="registeredShellScriptsAnchor" aria-expanded="true" href="#">
+                <i class="fa fa-fw fa-list-ol"></i> Shell Scripts</a>
+        </li>
+        <%}%>
+    </ul>
+</div>
